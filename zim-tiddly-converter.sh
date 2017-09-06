@@ -4,8 +4,8 @@ convert ( ) {
         nodir=${1##*/}
         notxt=${nodir%.txt}
 
-        creation_date=$(gsed -n '3p' $1 | cut -d ' ' -f 2 | sed 's/[^[:digit:]]//g') #extract the creation date of Zim doc
-        title=$(gsed -n '5p' $1 | cut -d ' ' -f 2)                                   #extract the title of the Zim doc
+        creation_date=$(sed -n '3p' $1 | cut -d ' ' -f 2 | sed 's/[^[:digit:]]//g') #extract the creation date of Zim doc
+        title=$(sed -n '5p' $1 | cut -d ' ' -f 2)                                   #extract the title of the Zim doc
 
         #making the new header by using change command on the originals
         #1st -e: put the creation date in first line
@@ -33,7 +33,7 @@ convert ( ) {
                                          # they also have special meaning in tiddly (make quotes).so I remove 'em too.
 
                                         # Repairing the Markup syntax.
-                                        gsed -E -e '6,$G'\
+                                        sed -E -e '6,$G'\
                                         -e "s/={6} (.*) ={6}/! \1/;"\
                                         -e "s/={5} (.*) ={5}/!! \1/"\
                                         -e "s/={4} (.*) ={4}/!!! \1/"\
@@ -47,8 +47,6 @@ convert ( ) {
                                         -e "s/\[\[((https?:\/\/(www\.)?)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))\|(.*)\]\]/\[\[\5\|\1\]\]/" > ${notxt}.tid
 
 }
-
-echo fuck "$1"
 
 for file in "${1}"/*.txt; do
 
@@ -66,4 +64,3 @@ for file in "${1}"/*.txt; do
     fi
 done
 mkdir tids; mv *.tid tids
-
