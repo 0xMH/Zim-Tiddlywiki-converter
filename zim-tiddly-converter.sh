@@ -5,7 +5,7 @@ convert ( ) {
         notxt=${nodir%.txt}
 
         creation_date=$(sed -n '3p' $1 | cut -d ' ' -f 2 | sed 's/[^[:digit:]]//g') #extract the creation date of Zim doc
-        title=$(sed -n '5p' $1 | cut -d ' ' -f 2)                                   #extract the title of the Zim doc
+        title="$notxt" #$(sed -n '5p' $1| sed 's/ //g' | cut -d ' ' -f 2)           #extract the title of the Zim doc
 
         #making the new header by using change command on the originals
         #1st -e: put the creation date in first line
