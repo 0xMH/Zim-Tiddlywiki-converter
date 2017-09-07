@@ -20,7 +20,7 @@ convert ( ) {
             -e "2c\\
                 modified: $creation_date" \
             -e "3c\\
-                tags: Contents ${2:-}" \
+                tags: ${2:-Contents}" \
             -e "4c\\
                 title: $title" \
             -e "5c\\
