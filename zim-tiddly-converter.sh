@@ -33,7 +33,7 @@ convert ( ) {
                                          # they also have special meaning in tiddly (make quotes).so I remove 'em too.
 
                                         # Repairing the Markup syntax.
-                                        gsed -E -e '6,$G'\
+                                        sed -E -e '6,$G'\
                                         -e "s/={6} (.*) ={6}/! \1/g"\
                                         -e "s/={5} (.*) ={5}/!! \1/g"\
                                         -e "s/={4} (.*) ={4}/!!! \1/g"\
